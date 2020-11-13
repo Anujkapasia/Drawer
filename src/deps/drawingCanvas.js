@@ -39,20 +39,39 @@ export default class DrawableCanvas {
             this.findxy('out', e)
         , false);
 
+        this.canvas.addEventListener("touchmove", (e) =>
+            this.findxy('touchmove', e)
+        , false);
+        this.canvas.addEventListener("touchstart", (e) =>
+            this.findxy('touchstart', e)
+        , false);
+        this.canvas.addEventListener("touchend", (e) =>
+            this.findxy('touchend', e)
+        , false);
+        this.canvas.addEventListener("touchcancel", (e) => 
+            this.findxy('touchcancel', e)
+        , false);
+
+        
+
         this.reSize();
     }
 
     reSize(){
         this.canvas.width  = this.canvas.offsetWidth;
         this.canvas.height = this.canvas.offsetHeight;
+        this.w = this.canvas.width;
+        this.h = this.canvas.height;
     }
 
     findxy=(res, e)=> {
+        
         if (res == 'down') {
             this.prevX = this.currX;
             this.prevY = this.currY;
             this.currX = e.clientX - this.canvas.offsetLeft;
             this.currY = e.clientY - this.canvas.offsetTop;
+            
     
             this.flag = true;
             this.dot_flag = true;
@@ -76,6 +95,38 @@ export default class DrawableCanvas {
                 this.draw();
             }
         }
+
+        if (res == 'touchstart') {
+            this.prevX = this.currX;
+            this.prevY = this.currY;
+            this.currX = e.touches[0].clientX - this.canvas.offsetLeft;
+            this.currY = e.touches[0].clientY - this.canvas.offsetTop;
+    
+            this.flag = true;
+            this.dot_flag = true;
+            if (this.dot_flag) {
+                this.ctx.beginPath();
+                this.ctx.fillStyle = this.x;
+                this.ctx.fillRect(this.currX, this.currY, 2, 2);
+                this.ctx.closePath();
+                this.dot_flag = false;
+            }
+        }
+        if (res == 'touchend' || res == "touchcancel") {
+            this.flag = false;
+        }
+        if (res == 'touchmove') {
+            if (this.flag) {
+                this.prevX = this.currX;
+                this.prevY = this.currY;
+                this.currX = e.touches[0].clientX - this.canvas.offsetLeft;
+                this.currY = e.touches[0].clientY - this.canvas.offsetTop;
+                this.draw();
+            }
+        }
+
+        
+        
     }
 
     draw() {

@@ -10,6 +10,7 @@ const App=(props)=> {
 
     useEffect(()=>{
         DrawCanvas = new DrawableCanvas()
+        // window.addEventListener('resize', DrawCanvas.reSize)
     })
 
 

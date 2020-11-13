@@ -1,0 +1,19 @@
+
+{
+    "short_name" : "Drawer",
+    "name" : "Draw to PDF",
+    "description":"Changes your drawing to PDF",
+    "icons":[
+        {
+            "src" : "./imgs/DrawerIcon.png",
+            "type" : "image/png",
+            "sizes": "200x200"
+            
+        }
+    ],
+    "start_url" : ".",
+    "display" : "standalone",
+    "theme_color" : "#fcefee",
+    "background_color" : "#fccde2"
+    
+}

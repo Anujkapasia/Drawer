@@ -25,6 +25,8 @@ body{
     // background: linear-gradient(to top left, #66ffff -15%, #0066ff 115%);
     background-color: #fccde2;
     overflow:hidden;
+    display:grid;
+    place-items: center;
 
 }
 
@@ -32,10 +34,6 @@ body{
     background-color: $theme-clr;
     width: 1400px;
     height:800px;
-    position: fixed;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
     border-radius: 20px;
     box-shadow:0px 0px 20px 0px rgba(0,0,0,0.2);
 
