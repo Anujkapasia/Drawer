@@ -24,7 +24,7 @@ const App=(props)=> {
             headers: { 'Content-Type': 'multipart/form-data' }
         }
 
-        axios.post('http://192.168.31.191/change', data, config).then(response => {
+        axios.post('http://drawerapi.herokuapp.com/change', data, config).then(response => {
             window.open(response, '_blank');
         }).catch((err)=>{
             console.log(err)
