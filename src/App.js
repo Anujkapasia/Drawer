@@ -3,10 +3,10 @@ import './styles/main.scss'
 import DrawableCanvas from './deps/drawingCanvas'
 import Colors from './elems/colors'
 
-
+const axios = require('axios')
 
 const App=(props)=> {
-    var DrawCanvas;
+    var DrawCanvas,canvasDataURL;
 
     useEffect(()=>{
         DrawCanvas = new DrawableCanvas()
@@ -15,9 +15,37 @@ const App=(props)=> {
 
 
     const downloadClickHandler = () => {
+        var canvasDataURL = DrawCanvas.canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        const canvasFile = dataURLtoFile(canvasDataURL,"drawnImage")
 
+        const data = new FormData()
+        data.append('photo', canvasFile, canvasFile.name)
+        const config = {
+            headers: { 'Content-Type': 'multipart/form-data' }
+        }
+
+        axios.post('http://192.168.31.191/change', data, config).then(response => {
+            window.open(response, '_blank');
+        }).catch((err)=>{
+            console.log(err)
+        })
     }
+
     
+    
+    
+    const dataURLtoFile = (dataurl, filename) => {
+        const arr = dataurl.split(',')
+        const mime = arr[0].match(/:(.*?);/)[1]
+        const bstr = atob(arr[1])
+        let n = bstr.length
+        const u8arr = new Uint8Array(n)
+        while (n) {
+        u8arr[n - 1] = bstr.charCodeAt(n - 1)
+        n -= 1 // to make eslint happy
+        }
+        return new File([u8arr], filename, { type: mime })
+    }
 
     return (
         <div className="main-container" >

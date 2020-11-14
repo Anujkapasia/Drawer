@@ -6,7 +6,6 @@ export default class DrawableCanvas {
         BLUE:"#304ffe",
         GREEN:"#00897b",
         ORANGE:"#ff5722",
-        ERASE:"#e6e6d6",
         
     }
 
@@ -25,7 +24,7 @@ export default class DrawableCanvas {
 
     
     constructor(){
-        
+
         this.canvas.addEventListener("mousemove", (e) =>
             this.findxy('move', e)
         , false);
@@ -141,6 +140,7 @@ export default class DrawableCanvas {
 
     erase() {
         this.ctx.clearRect(0, 0, this.w, this.h);
+        this.ctx.globalCompositeOperation = "source-over";
         
     }
 
@@ -154,28 +154,32 @@ export default class DrawableCanvas {
     color(obj) {
         switch (obj) {
             case 1:
+                this.ctx.globalCompositeOperation = "source-over";
                 this.x = this.COLORS.RED;
                 this.y=4;
                 break;
             case 2:
+                this.ctx.globalCompositeOperation = "source-over";
                 this.x = this.COLORS.YELLOW;
                 this.y=4;
                 break;
             case 3:
+                this.ctx.globalCompositeOperation = "source-over";
                 this.x = this.COLORS.BLUE;
                 this.y=4;
                 break;
             case 4:
+                this.ctx.globalCompositeOperation = "source-over";
                 this.x = this.COLORS.GREEN;
                 this.y=4;
                 break;
             case 5:
+                this.ctx.globalCompositeOperation = "source-over";
                 this.x = this.COLORS.ORANGE;
                 this.y=4;
                 break;
             case 6:
-                this.x = this.COLORS.ERASE;
-                this.y=8;
+                this.ctx.globalCompositeOperation = "destination-out";
                 break;
             case 7:
                 this.erase()
