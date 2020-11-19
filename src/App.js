@@ -24,8 +24,8 @@ const App=(props)=> {
             headers: { 'Content-Type': 'multipart/form-data' }
         }
 
-        axios.post('https://drawerapi.herokuapp.com/change', data, config).then(response => {
-            window.open(response, '_blank');
+        axios.post('http://scarb.zapto.org/change', data, config).then(response => {
+            window.open(response.data, '_blank');
         }).catch((err)=>{
             console.log(err)
         })
